@@ -114,6 +114,15 @@ backend nodejs_app_servers_ssl
   <% end -%>
 <% end -%>
 
+<% if !node["opsworks"]["layers"]["mqtt_servers"].empty? -%>
+backend mqtt_servers
+  mode tcp
+  balance leastconn
+  <% node["opsworks"]["layers"]["mqtt_servers"].each do |backend| -%>
+    server <%= backend['name'] %> <%= backend['ip'] %>:1882 check
+  <% end -%>
+<% end -%>
+
 <% if !node[:haproxy][:static_backends].empty? -%>  
 backend static_servers
   balance <%= node[:haproxy][:balance] %>
@@ -320,3 +329,10 @@ frontend https-in
   <% end -%>
 
 <% end -%>  
+
+<% if !node["opsworks"]["layers"]["mqtt_servers"].empty? -%>
+listen mqtt
+  bind *:1883
+  bind *:1882
+  use_backend mqtt_servers
+<% end -%>
