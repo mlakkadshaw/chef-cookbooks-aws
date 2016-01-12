@@ -114,7 +114,7 @@ backend nodejs_app_servers_ssl
   <% end -%>
 <% end -%>
 
-<% if !node["opsworks"]["layers"]["mqtt_servers"].empty? -%>
+<% if !node["opsworks"]["layers"]["mqtt_servers"].nil? -%>
 backend mqtt_servers
   mode tcp
   balance leastconn
