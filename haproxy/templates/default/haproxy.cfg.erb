@@ -330,7 +330,7 @@ frontend https-in
 
 <% end -%>  
 
-<% if !node["opsworks"]["layers"]["mqtt_servers"].empty? -%>
+<% if !node["opsworks"]["layers"]["mqtt_servers"]["instances"].empty? -%>
 listen mqtt
   bind *:1883
   bind *:1882
