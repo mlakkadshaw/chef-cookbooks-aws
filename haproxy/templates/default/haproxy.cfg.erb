@@ -114,12 +114,12 @@ backend nodejs_app_servers_ssl
   <% end -%>
 <% end -%>
 
-<% if !node["opsworks"]["layers"]["mqtt_servers"].empty? -%>
+<% if !node["opsworks"]["layers"]["mqtt_servers"]["instances"].empty? -%>
 backend mqtt_servers
   mode tcp
   balance leastconn
-  <% node["opsworks"]["layers"]["mqtt_servers"].each do |backend| -%>
-    server <%= backend['name'] %> <%= backend['ip'] %>:1882 check
+  <% node["opsworks"]["layers"]["mqtt_servers"]["instances"].each do |backend| -%>
+    server <%= backend['instancehostname'] %> <%= backend['ip'] %>:1882 check
   <% end -%>
 <% end -%>
 
