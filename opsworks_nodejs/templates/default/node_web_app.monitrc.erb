@@ -1,5 +1,5 @@
 check host node_web_app_<%= @application_name %> with address 127.0.0.1
-  start program = "/bin/bash -c 'cd <%= @deploy[:deploy_to] %>/current ; source <%= @deploy[:deploy_to] %>/shared/app.env ; /usr/bin/env PORT=<%= @deploy[:environment_variables][:APP_PORT] %> NODE_PATH=<%= @deploy[:deploy_to] %>/current/node_modules:<%= @deploy[:deploy_to] %>/current /usr/local/bin/node <%= @monitored_script %> 2>> <%= @deploy[:deploy_to]%>/shared/log/node.stderr.log 1>> <%= @deploy[:deploy_to]%>/shared/log/node.stdout.log' & /usr/bin/env PORT=<%= @deploy[:environment_variables][:APP_PORT] %> NODE_PATH=<%= @deploy[:deploy_to] %>/current/node_modules:<%= @deploy[:deploy_to] %>/current /usr/local/bin/node <%= @monitored_script_2 %> 2>> <%= @deploy[:deploy_to]%>/shared/log/node_2.stderr.log 1>> <%= @deploy[:deploy_to]%>/shared/log/node_2.stdout.log'"
+  start program = "/bin/bash -c 'cd <%= @deploy[:deploy_to] %>/current ; source <%= @deploy[:deploy_to] %>/shared/app.env ; /usr/bin/env PORT=<%= @deploy[:environment_variables][:APP_PORT] %> NODE_PATH=<%= @deploy[:deploy_to] %>/current/node_modules:<%= @deploy[:deploy_to] %>/current /usr/local/bin/node <%= @monitored_script %> 2>> <%= @deploy[:deploy_to]%>/shared/log/node.stderr.log 1>> <%= @deploy[:deploy_to]%>/shared/log/node.stdout.log & /usr/local/bin/node <%= @monitored_script_2 %> 2>> <%= @deploy[:deploy_to]%>/shared/log/node_2.stderr.log 1>> <%= @deploy[:deploy_to]%>/shared/log/node_2.stdout.log'"
   stop program = "/usr/bin/pkill -f 'node <%= @monitored_script %>'; /usr/bin/pkill -f 'node <%= @monitored_script_2 %>'"
   <% if @deploy[:ssl_support] -%>
   if failed port <%= @deploy[:environment_variables][:APP_PORT] %> type TCPSSL protocol HTTP
@@ -9,6 +9,4 @@ check host node_web_app_<%= @application_name %> with address 127.0.0.1
     request /
     with timeout 10 seconds
     then restart
-
-
 
