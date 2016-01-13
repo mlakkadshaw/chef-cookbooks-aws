@@ -31,8 +31,8 @@ node[:deploy].each do |application, deploy|
 
   ruby_block "restart mqtt application #{application}" do
     block do
-      Chef::Log.info("restart mqtt via: #{default[:deploy][application][:mqtt][:restart_command]}")
-      Chef::Log.info(`#{default[:deploy][application][:mqtt][:restart_command]}`)
+      Chef::Log.info("restart mqtt via: #{node[:deploy][application][:mqtt][:restart_command]}")
+      Chef::Log.info(`#{node[:deploy][application][:mqtt][:restart_command]}`)
       $? == 0
     end
   end
