@@ -119,7 +119,7 @@ backend mqtt_servers
   mode tcp
   balance leastconn
   <% node["opsworks"]["layers"]["mqtt_servers"]["instances"].each do |backend, instance| -%>
-    server <%= instance['hostname'] %> <%= instance['ip'] %>:1882 check
+    server <%= instance['name'] %> <%= instance['ip'] %>:1882 check
   <% end -%>
 <% end -%>
 
