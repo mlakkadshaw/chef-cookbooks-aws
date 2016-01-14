@@ -332,6 +332,7 @@ frontend https-in
 
 <% if !node["opsworks"]["layers"]["mqtt_servers"]["instances"].empty? -%>
 listen mqtt
+  mode tcp
   bind *:1883
   bind *:1882
   use_backend mqtt_servers
