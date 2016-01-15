@@ -39,7 +39,8 @@ node[:deploy].each do |application, deploy|
       notifies :write, "log[downloading]", :immediately
       action :install
     end
-
+  end
+  
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
