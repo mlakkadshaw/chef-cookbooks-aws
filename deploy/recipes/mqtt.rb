@@ -3,12 +3,6 @@ include_recipe 'deploy'
 PACKAGE_BASENAME = "opsworks-nodejs"
 LECAGY_PACKAGES = []
 
-node[:deploy].each do |application, deploy|
-  if deploy[:application_type] != 'nodejs'
-    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
-    next
-  end
-
   pm_helper = OpsWorks::PackageManagerHelper.new(node)
   current_package_info = pm_helper.summary(PACKAGE_BASENAME)
 
@@ -42,6 +36,12 @@ node[:deploy].each do |application, deploy|
       notifies :write, "log[downloading]", :immediately
       action :install
     end
+  end
+  
+node[:deploy].each do |application, deploy|
+  if deploy[:application_type] != 'nodejs'
+    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
+    next
   end
 
   opsworks_deploy_dir do
