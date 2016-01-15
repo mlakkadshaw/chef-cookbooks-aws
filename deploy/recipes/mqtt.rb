@@ -1,5 +1,8 @@
 include_recipe 'deploy'
 
+PACKAGE_BASENAME = "opsworks-mqtt"
+LECAGY_PACKAGES = []
+
 node[:deploy].each do |application, deploy|
   if deploy[:application_type] != 'nodejs'
     Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
@@ -40,7 +43,7 @@ node[:deploy].each do |application, deploy|
       action :install
     end
   end
-  
+
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
