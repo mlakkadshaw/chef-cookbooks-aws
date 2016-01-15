@@ -1,6 +1,6 @@
 include_recipe 'deploy'
 
-PACKAGE_BASENAME = "opsworks-mqtt"
+PACKAGE_BASENAME = "opsworks-nodejs"
 LECAGY_PACKAGES = []
 
 node[:deploy].each do |application, deploy|
