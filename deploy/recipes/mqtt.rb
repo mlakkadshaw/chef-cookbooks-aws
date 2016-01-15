@@ -4,8 +4,8 @@ PACKAGE_BASENAME = "opsworks-nodejs"
 LECAGY_PACKAGES = []
 
 node[:deploy].each do |application, deploy|
-  if deploy[:application_type] != 'nodejs'
-    Chef::Log.debug("Skipping deploy::nodejs for application #{application} as it is not a node.js app")
+  if deploy[application]["application"] != 'mqtt'
+    Chef::Log.debug("Skipping deploy::mqtt for application #{application} as it is not a mqtt app")
     next
   end
 
